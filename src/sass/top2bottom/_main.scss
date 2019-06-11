@@ -1,0 +1,85 @@
+// standard
+$base-size: 120px;
+$base-color: #ffbf16;
+$base-color-active: darkorange;
+
+nav.menu-container {
+  width: $base-size;
+  height: $base-size;
+  background-color: $base-color;
+  text-align: center;
+  color: #ffffff;
+  font-size: 60px;
+  cursor: pointer;
+  line-height: 120px;
+  position: relative;
+
+  &:hover {
+    background-color: $base-color-active;
+  }
+
+  ul {
+    background: $base-color;
+    list-style: none;
+    margin: 0;
+    padding-left: 0;
+
+    &.dropdown:first-child {
+      margin-top: $base-size;
+    }
+
+    &.dropdown,
+    & li ul.dropdown {
+      visibility: hidden;
+      opacity: 0;
+      position: absolute;
+      left: 0;
+      width: inherit; //makes sure the width is the same as the nav
+  
+    }
+
+    li {
+      display: block;
+      transition-duration: 0.5s;
+      width: inherit;
+
+      &:hover {
+        background-color: $base-color-active;
+      }
+
+      &:hover > ul {
+        visibility: visible;
+        opacity: 1;
+        display: block;
+        // background-color: $base-color-active;
+      }
+    }
+  }
+  // dev can modify position via css or possibly via js
+  &--static {
+    @extend nav.menu-container;
+    left: 0;
+    top: 0;
+
+    &:hover > ul {
+      visibility: visible;
+      opacity: 1;
+      display: block;
+    }
+
+    &-v2 {
+      @extend nav.menu-container--static;
+      li {
+        position: relative;
+      }
+
+      // ul.dropdown,
+      ul li ul.dropdown {
+        left: $base-size;
+        top: 0;
+        margin-top: 0;
+      }
+    }
+  }
+}
+
